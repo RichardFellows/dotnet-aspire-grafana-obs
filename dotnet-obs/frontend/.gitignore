@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Lockfile contains platform-specific native bindings (rolldown/Vite 8).
+# Each developer generates their own via `npm install`.
+package-lock.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
