@@ -12,8 +12,7 @@ dist
 dist-ssr
 *.local
 
-# Lockfile contains platform-specific native bindings (rolldown/Vite 8).
-# Each developer generates their own via `npm install`.
+# npm lockfile — not used (project uses pnpm)
 package-lock.json
 
 # Editor directories and files
