@@ -1,0 +1,53 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch:
+    timeout: 5s
+  # Preserve resource attributes as Loki labels so queries can filter by service
+  resource:
+    attributes:
+      - action: insert
+        key: loki.resource.labels
+        value: service.name, service.namespace, service.version
+
+exporters:
+  loki:
+    endpoint: http://loki:3100/loki/api/v1/push
+    default_labels_enabled:
+      exporter: false
+      job: true
+      level: true
+      service_name: true
+
+  otlp/tempo:
+    endpoint: tempo:4317
+    tls:
+      insecure: true
+
+  # Exposed on :8889 for Prometheus to scrape
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    namespace: dotnet_obs
+    resource_to_telemetry_conversion:
+      enabled: true
+
+service:
+  pipelines:
+    logs:
+      receivers: [otlp]
+      processors: [resource, batch]
+      exporters: [loki]
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp/tempo]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus]

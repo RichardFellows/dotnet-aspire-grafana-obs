@@ -1,0 +1,5 @@
+{
+  "appHost": {
+    "path": "dotnet-obs.AppHost/dotnet-obs.AppHost.csproj"
+  }
+}

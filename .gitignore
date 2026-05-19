@@ -1,0 +1,33 @@
+# .NET
+bin/
+obj/
+*.g.props
+*.user
+*.suo
+.vs/
+*.userprefs
+launchSettings.json
+
+# Rider / VS Code
+.idea/
+.vscode/
+*.DotSettings.user
+
+# User secrets
+**/secrets.json
+
+# Node / frontend
+node_modules/
+dist/
+.vite/
+
+# Aspire dev certificates
+*.pfx
+
+# Claude Code / agent skills (tool internals)
+.claude/
+.agents/
+
+# OS
+.DS_Store
+Thumbs.db
